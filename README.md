@@ -1,1 +1,3 @@
-​	这个repositories包含了许多令我十分激动的代码，在其他人看来它可能写差，或者可能一段时间后我自己也会觉得写很差，但是我现在仍然想将它分享给大家，因为这些代码真的让我感觉到写代码（学习Java）是一件快乐的事，是一件令人兴奋的事。请原谅的英语实在拿不出手，只好用中文写了这篇自述文件
+​	这个repositories包含了许多令我十分激动的代码，在其他人看来它可能写差，或者可能一段时间后我自己也会觉得写很差，但是我现在仍然想将它分享给大家，因为这些代码真的让我感觉到写代码是一件快乐的事，是一件令人兴奋的事。请原谅的英语实在拿不出手，只好用中文写了这篇自述文件
+
+​	This repositories contains a lot of code .it's makes me very excited. In other people's opinion, it may be bad . Some time later, I feel that the code is very bad. But I still want to share it with you. These codes make me feel that writing code is a happy thing, it is an exciting thing Please forgive the my poor English.
