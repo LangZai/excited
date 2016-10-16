@@ -1,4 +1,6 @@
-package com.chinasofti.javase.ch9.extend.homework;
+package com.excittingCode.story;
+
+import java.util.Scanner;
 
 /**
  *
@@ -8,6 +10,7 @@ package com.chinasofti.javase.ch9.extend.homework;
 public class App {
 
 	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
 		Person person = new Person("王二", 120, true);
 		YuntaiTicketOffice ticketOffice = new YuntaiTicketOffice();
 		Dice dice = new Dice();
@@ -16,11 +19,12 @@ public class App {
 		}
 
 		person.cost();
-		System.out.println("我去玩两把兴许能凑够钱");
-		for (int i = 0; i < 2; i++) {
+		System.out.println("开了两把黑后……，好无聊啊我去赌两把兴许能凑够钱");
+		do {
 			dice.playDice(person);
 			System.out.println("我还剩" + person.getMoney() + "元");
-		}
+			System.out.println("还玩吗（y\\n）");
+		} while (in.next().equals("y"));
 
 	}
 

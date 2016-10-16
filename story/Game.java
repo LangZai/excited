@@ -1,4 +1,4 @@
-package com.chinasofti.javase.ch9.extend.homework;
+package com.excittingCode.story;
 
 /**
  *
@@ -6,7 +6,7 @@ package com.chinasofti.javase.ch9.extend.homework;
  * @createTime 2016年10月11日 下午6:40:58
  */
 public class Game {
-	
+
 	private double wager;
 
 	private double multiple;
