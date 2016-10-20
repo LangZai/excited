@@ -122,35 +122,25 @@ public class TheMagicBladeTime {
 		date = this.dateFormat(new SimpleDateFormat("HH:mm").format(date));
 		Calendar c = Calendar.getInstance();
 		if (isBefore4Hours(date)) {
-			date = before4Hours(date, c);
+			date = amendHours(date, c, 4);
 			return date;
 		} else if (isBefore8Hours(date)) {
-			date = before8Hours(date, c);
+			date = amendHours(date, c, 8);
 			return date;
 		} else if (isBefore12Hours(date)) {
-			date = before12Hours(date, c);
+			date = amendHours(date, c, 12);
 			return date;
 		} else if (isBefore16Hours(date)) {
-			date = before16Hours(date, c);
+			date = amendHours(date, c, 16);
 			return date;
 		} else if (date.equals(this.dateFormat("23:59"))
 				|| date.before(this.dateFormat("23:59")) && date.after(this.dateFormat("22:03"))) {
-			// 将Date-->Calendar
-			c.setTime(date);
-			// 将小时+4
-			c.set(Calendar.HOUR_OF_DAY, c.get(Calendar.HOUR_OF_DAY) - 4);
-			// 将Calendar-->Date
-			date = this.dateFormat(new SimpleDateFormat("HH:mm").format(c.getTime()));
+			date = amendHours(date, c, -4);
 			return date;
 		} else if (date.equals(this.dateFormat("00:00"))
 				|| date.before(this.dateFormat("2:04")) && date.after(this.dateFormat("00:00"))) {
-			// 将Date-->Calendar
-			c.setTime(date);
-			// 将小时+4
-			c.set(Calendar.HOUR_OF_DAY, c.get(Calendar.HOUR_OF_DAY) + 20);
-			// 将Calendar-->Date
-			date = this.dateFormat(new SimpleDateFormat("HH:mm").format(c.getTime()));
-			return date;
+
+			return amendHours(date, c, 20);
 		}
 		return date;
 
@@ -166,16 +156,6 @@ public class TheMagicBladeTime {
 		return date.before(this.dateFormat("18:04")) && date.after(this.dateFormat("14:03"));
 	}
 
-	private Date before4Hours(Date date, Calendar c) {
-		// 将Date-->Calendar
-		c.setTime(date);
-		// 将小时+4
-		c.set(Calendar.HOUR_OF_DAY, c.get(Calendar.HOUR_OF_DAY) + 4);
-		// 将Calendar-->Date
-		date = this.dateFormat(new SimpleDateFormat("HH:mm").format(c.getTime()));
-		return date;
-	}
-
 	/**
 	 * 比标准超前8个小时
 	 * 
@@ -184,16 +164,6 @@ public class TheMagicBladeTime {
 	 */
 	private boolean isBefore8Hours(Date date) {
 		return date.before(this.dateFormat("14:04")) && date.after(this.dateFormat("10:03"));
-	}
-
-	private Date before8Hours(Date date, Calendar c) {
-		// 将Date-->Calendar
-		c.setTime(date);
-		// 将小时+4
-		c.set(Calendar.HOUR_OF_DAY, c.get(Calendar.HOUR_OF_DAY) + 8);
-		// 将Calendar-->Date
-		date = this.dateFormat(new SimpleDateFormat("HH:mm").format(c.getTime()));
-		return date;
 	}
 
 	/**
@@ -206,16 +176,6 @@ public class TheMagicBladeTime {
 		return date.before(this.dateFormat("10:04")) && date.after(this.dateFormat("6:03"));
 	}
 
-	private Date before12Hours(Date date, Calendar c) {
-		// 将Date-->Calendar
-		c.setTime(date);
-		// 将小时+4
-		c.set(Calendar.HOUR_OF_DAY, c.get(Calendar.HOUR_OF_DAY) + 12);
-		// 将Calendar-->Date
-		date = this.dateFormat(new SimpleDateFormat("HH:mm").format(c.getTime()));
-		return date;
-	}
-
 	/**
 	 * 比标准超前16个小时
 	 * 
@@ -226,11 +186,11 @@ public class TheMagicBladeTime {
 		return date.before(this.dateFormat("6:04")) && date.after(this.dateFormat("2:03"));
 	}
 
-	private Date before16Hours(Date date, Calendar c) {
+	private Date amendHours(Date date, Calendar c, int amend) {
 		// 将Date-->Calendar
 		c.setTime(date);
-		// 将小时+4
-		c.set(Calendar.HOUR_OF_DAY, c.get(Calendar.HOUR_OF_DAY) + 16);
+		// 将小时+amend
+		c.set(Calendar.HOUR_OF_DAY, c.get(Calendar.HOUR_OF_DAY) + amend);
 		// 将Calendar-->Date
 		date = this.dateFormat(new SimpleDateFormat("HH:mm").format(c.getTime()));
 		return date;

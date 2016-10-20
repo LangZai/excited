@@ -10,10 +10,12 @@ import java.util.Scanner;
  */
 public class App {
 	public static void main(String[] args) {
+		// 功能1
 		Scanner in = new Scanner(System.in);
 		TheMagicBladeTime gameTime = new TheMagicBladeTime();
 		System.out.println("天涯明月刀的现在时刻：" + gameTime.theMagicBladeTime());
 
+		// 功能2
 		System.out.print("指定时间显示天涯明月刀游戏时间(y\\n)：");
 		String judge = in.nextLine();
 		String time = null;
@@ -25,6 +27,7 @@ public class App {
 			judge = in.nextLine();
 		}
 
+		// 功能3
 		System.out.println("指定某个时辰距现在还有多长时间：");
 		System.out.print("请输入时辰：");
 		String traditionTime = null;
