@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -17,10 +18,10 @@ public class TheMagicBladeTime {
 	 * @param 时间
 	 * @return
 	 */
-	private Date dateFormat(String date) {
+	private Date dateFormat(String stringDate) {
 		Date tempDate = null;
 		try {
-			tempDate = new SimpleDateFormat("HH:mm").parse(date);
+			tempDate = new SimpleDateFormat("HH:mm").parse(stringDate);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -118,6 +119,7 @@ public class TheMagicBladeTime {
 	 * @return
 	 */
 	private Date changeStardardDate(Date date) {
+		date = this.dateFormat(new SimpleDateFormat("HH:mm").format(date));
 		Calendar c = Calendar.getInstance();
 		if (isBefore4Hours(date)) {
 			date = before4Hours(date, c);
@@ -235,13 +237,78 @@ public class TheMagicBladeTime {
 	}
 
 	/**
+	 * 转换为天涯明月刀时间
+	 * 
+	 * @param date
+	 * @return
+	 */
+	private Date traditionTime(String traditionTime) {
+		switch (traditionTime) {
+
+		case "子时":
+			return this.ziShi();
+		case "丑时":
+			return this.chouShi();
+		case "寅时":
+			return this.yinShi();
+		case "卯时":
+			return this.maoShi();
+		case "辰时":
+			return this.chenShi();
+		case "巳时":
+			return this.siShi();
+		case "午时":
+			return this.wuShi();
+		case "未时":
+			return this.weiShi();
+		case "申时":
+			return this.shenShi();
+		case "酉时":
+			return this.youShi();
+		case "戌时":
+			return this.xuShi();
+		case "亥时":
+			return this.haiShi();
+		default:
+			return new Date();
+		}
+
+	}
+
+	public String waitTime(String traditionTime) {
+		Date date = this.traditionTime(traditionTime);
+		Date nowDate = this.changeStardardDate(new Date());
+		GregorianCalendar date1 = new GregorianCalendar();
+		date1.setTime(date);
+		GregorianCalendar nowdate1 = new GregorianCalendar();
+		nowdate1.setTime(nowDate);
+		if (date.before(nowDate)) {
+			date1.add(Calendar.HOUR_OF_DAY, 4);
+			date1.add(Calendar.HOUR_OF_DAY, -nowdate1.get(Calendar.HOUR_OF_DAY));
+			date1.add(Calendar.MINUTE, -nowdate1.get(Calendar.MINUTE));
+			return this.waitTimeFormat(date1.getTime(), traditionTime);
+		} else if (date.after(nowDate)) {
+
+			date1.add(Calendar.HOUR_OF_DAY, -nowdate1.get(Calendar.HOUR_OF_DAY));
+			date1.add(Calendar.MINUTE, -nowdate1.get(Calendar.MINUTE));
+			return this.waitTimeFormat(date1.getTime(), traditionTime);
+		} else {
+			return "现在已经是" + traditionTime;
+		}
+
+	}
+
+	private String waitTimeFormat(Date waitDate, String traditionTime) {
+		return new SimpleDateFormat("大概需要HH小时mm分钟才能到" + traditionTime).format(waitDate);
+	}
+
+	/**
 	 * 当前时间的天涯明月刀的时间
 	 * 
 	 * @return
 	 */
 	public String theMagicBladeTime() {
 		Date date = new Date();
-		date = this.dateFormat(new SimpleDateFormat("HH:mm").format(date));
 		return traditionTime(this.changeStardardDate(date));
 	}
 
